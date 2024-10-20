@@ -1,7 +1,9 @@
+import { Suspense, lazy } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Counter from "./feat/counter/counter";
-import About from "./feat/about/about";
-import Contact from "./feat/contact/contact";
+
+const Counter = lazy(() => import("./feat/counter/counter"));
+const About = lazy(() => import("./feat/about/about"));
+const Contact = lazy(() => import("./feat/contact/contact"));
 
 function App() {
 	return (
@@ -20,11 +22,13 @@ function App() {
 						</li>
 					</ul>
 				</nav>
-				<Routes>
-					<Route path="/" element={<Counter />} />
-					<Route path="/about" element={<About />} />
-					<Route path="/contact" element={<Contact />} />
-				</Routes>
+				<Suspense fallback={<div>Loading...</div>}>
+					<Routes>
+						<Route path="/" element={<Counter />} />
+						<Route path="/about" element={<About />} />
+						<Route path="/contact" element={<Contact />} />
+					</Routes>
+				</Suspense>
 			</div>
 		</Router>
 	);

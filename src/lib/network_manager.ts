@@ -44,14 +44,14 @@ const request = async <T>(
 		const response = await fetch(`${API_BASE_URL}${url}`, config);
 
 		if (!response.ok) {
-			const errorData = await response.json();
+			const errorData = (await response.json()) as { message?: string };
 			throw new APIError(
 				errorData.message || "An error occurred",
 				response.status,
 			);
 		}
 
-		const data = await response.json();
+		const data = (await response.json()) as T;
 		console.log("Data:", data);
 		return { data, status: response.status };
 	} catch (error) {
