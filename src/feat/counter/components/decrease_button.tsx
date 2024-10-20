@@ -1,5 +1,5 @@
 import { useAtom } from "jotai";
-import { countAtom } from "../lib/store";
+import { countAtom } from "../../../lib/store";
 
 export const DecrementButton = () => {
 	const [_, setCount] = useAtom(countAtom);

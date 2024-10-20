@@ -1,10 +1,16 @@
 import { useAtom } from "jotai";
-import { countAtom } from "../lib/store";
-import { AddButton } from "./add_button";
-import { DecrementButton } from "./decrease_button";
+import { countAtom } from "../../lib/store";
+import { AddButton } from "./components/add_button";
+import { DecrementButton } from "./components/decrease_button";
+import { useEffect } from "react";
+import { fetchCount } from "./counter.repo";
 
 const Counter = () => {
-	const [count, _] = useAtom(countAtom);
+	const [count, setCount] = useAtom(countAtom);
+
+	useEffect(() => {
+		fetchCount().then((count) => setCount(count));
+	}, []);
 
 	return (
 		<div className="flex items-center justify-center min-h-screen">

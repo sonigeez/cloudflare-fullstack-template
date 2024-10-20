@@ -2,7 +2,9 @@ import { Hono } from "hono";
 import { handle } from "hono/cloudflare-pages";
 import { apiRoute } from "../../backend";
 
-const app = new Hono();
+const app = new Hono({
+	strict: false,
+});
 
 app.route("/api", apiRoute);
 
